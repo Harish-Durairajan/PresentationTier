@@ -1,0 +1,30 @@
+pipeline{
+    agent any
+    stages{
+        stage("clean workspace"){
+            steps{
+                cleanWs()
+            }
+        }
+        stage("checking out from github"){
+            steps{
+                checkout scmGit(branches: [[name: '*/${Branch}']], 
+                userRemoteConfigs: [[url: '${git_url}']])
+            }
+        }
+        stage("Building the source file"){
+            steps{
+                sh "pwd"
+                sh "cd "
+                sh "cd /home/harish/.jenkins/workspace/sample-angular-CICD/hello-angular" 
+                sh "npm i"             
+                sh "ng build"
+            }
+        }
+        stage("Deploying in S3"){
+            steps{
+                sh "aws s3 cp dist/hello-angular s3://{sample-cicd-harish}"
+            }
+        }
+    }
+}
