@@ -23,7 +23,7 @@ pipeline{
         }
         stage("Deploying in S3"){
             steps{
-                sh "aws s3 cp dist/angular-002 s3://{sample-cicd-harish}"
+                sh "aws s3 cp dist/angular-002 s3://{s3_bucket_name}"
             }
         }
     }
