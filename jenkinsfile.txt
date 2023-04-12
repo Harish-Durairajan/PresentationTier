@@ -14,7 +14,7 @@ pipeline{
         }
         stage("Building the source file"){
             steps{
-                sh "pwd"
+                //sh "pwd"
                 sh "npm i"             
                 sh "npm run build"
             }
